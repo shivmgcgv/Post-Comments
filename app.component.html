@@ -1,0 +1,35 @@
+<div class="container">
+
+    <div class="jumbotron">
+        <p class="h1 text-center">Posts</p>
+    </div>
+
+    <div class="text-center" *ngIf="!progressFlag">
+        <i class="fas fa-circle-notch fa-spin fa-4x"></i>
+    </div>
+
+    <div *ngIf="progressFlag">
+        <div class="card mb-2" *ngFor="let post of posts;let i=index">
+            <div class="card-body">
+                <h4 class="card-title">{{post.title}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Posted by - {{post.userId}}</h6>
+                <p class="card-text">{{post.body}}</p>
+                <button class="btn btn-link p-0" (click)="getComments(post.id,i)" type="button" data-toggle="collapse"
+                    attr.data-target="#collapseExample{{i}}" aria-expanded="false" attr.aria-controls="collapseExample{{i}}">
+                    view comments
+                </button>
+
+                <div class="collapse" id="collapseExample{{i}}">
+               
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let comment of comments[i]">
+                                    {{comment.body}}
+                            </li>
+                        </ul>
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
